@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <title>Search</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/user">Me</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Leave</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Request
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/attendance/correction">Attendance Correction</a></li>
+                  <li><a class="dropdown-item" href="/attendance">Attendance</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Approvals
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/correction/attendance">Attendance Correction</a></li>
+                  <li><a class="dropdown-item" href="/approve/attendance">Attendance</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">Documents</a>
+              </li>
+              <%  if( employees.role  === 'Admin'){ %>
+                <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="/employeeDirectory">Employ Directory</a>
+                </li>
+               <% } else {%>
+                <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="/search">Search</a>
+                </li>
+              <% } %> 
+            </ul>
+    
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <%= employees.username %>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <form action="/profile">
+                    <button class="btn btn-light">Profile</button>
+                  </form>
+                  <form action="/logout" method="POST">
+                    <button class="btn btn-light">Logout</button>
+                  </form>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                </ul>
+              </li>
+            </ul>
+        </div>
+        </div>
+        </div>
+      </nav>
+
+      <div class="container my-4 center">
+      <form class="form-inline my-2 my-lg-0" action="/search/username" method="POST">
+          <div class="row">
+              <div class="col">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search employees by username" name="Search">
+    </div>
+    <div class="col">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </div>
+          </div>
+      </form>
+      <div class="card">
+        <h5 class="card-header"><%= searchuser[0].username %></h5>
+        <div class="card-body">
+          <p class="card-title">Employee Code: <%= searchuser[0].employeeCode %></p>
+          <p class="card-text">Profile: <%= searchuser[0].profile %></p>
+          <p class="card-text">Mobile No.: <%= searchuser[0].mobileNo %></p>
+          <p class="card-text">Email: <%= searchuser[0].emailAddress %></p>
+
+        </div>
+      </div>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+    crossorigin="anonymous"></script>
+</body>
+</html>
